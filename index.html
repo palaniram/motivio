@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MotivIO — Motivated Seller Lists for Bay Area Investors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #2C3E50;
+  line-height: 1.6;
+  background: #FFFFFF;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ── Nav ── */
+.nav {
+  position: sticky;
+  top: 0;
+  background: #FFFFFF;
+  border-bottom: 1px solid #E0E4EA;
+  z-index: 100;
+  padding: 16px 0;
+}
+
+.nav .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0B7A75;
+}
+
+.btn {
+  display: inline-block;
+  background: #0B7A75;
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  padding: 14px 28px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: inherit;
+}
+
+.btn:hover {
+  background: #085E5A;
+}
+
+.btn-nav {
+  padding: 10px 22px;
+  font-size: 0.9rem;
+}
+
+/* ── Shared ── */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: 80px 0;
+}
+
+.section-alt {
+  background: #F7F8FA;
+}
+
+.section-heading {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0D2137;
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+/* ── Hero ── */
+.hero {
+  padding: 100px 0 80px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 2.75rem;
+  font-weight: 800;
+  color: #0D2137;
+  line-height: 1.2;
+  max-width: 720px;
+  margin: 0 auto 20px;
+}
+
+.hero-sub {
+  font-size: 1.15rem;
+  color: #5A6A7A;
+  max-width: 640px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+}
+
+.waitlist-form {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  max-width: 480px;
+  margin: 0 auto 16px;
+}
+
+.waitlist-form input[type="email"] {
+  flex: 1;
+  padding: 14px 18px;
+  border: 1px solid #E0E4EA;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.waitlist-form input[type="email"]:focus {
+  border-color: #0B7A75;
+}
+
+.hero-note {
+  font-size: 0.9rem;
+  color: #5A6A7A;
+  margin-bottom: 12px;
+}
+
+.hero-social {
+  font-size: 0.85rem;
+  color: #5A6A7A;
+  font-weight: 500;
+}
+
+.thank-you {
+  display: none;
+  background: #E6F4F3;
+  border: 1px solid #0B7A75;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 480px;
+  margin: 0 auto 16px;
+  color: #0D2137;
+  font-weight: 500;
+}
+
+.thank-you.visible {
+  display: block;
+}
+
+/* ── Cards grid ── */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.card {
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 32px 28px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0D2137;
+  margin-bottom: 12px;
+}
+
+.card p {
+  color: #5A6A7A;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+/* ── Solution icons ── */
+.solution-icon {
+  width: 48px;
+  height: 48px;
+  background: #E6F4F3;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  font-size: 1.4rem;
+}
+
+/* ── Steps ── */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  position: relative;
+}
+
+.step {
+  text-align: center;
+  position: relative;
+}
+
+.step-number {
+  width: 44px;
+  height: 44px;
+  background: #C8902A;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.step h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0D2137;
+  margin-bottom: 10px;
+}
+
+.step p {
+  color: #5A6A7A;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+/* connector lines */
+.steps::before,
+.steps::after {
+  content: '';
+  position: absolute;
+  top: 22px;
+  height: 2px;
+  background: #E0E4EA;
+}
+.steps::before {
+  left: calc(100% / 6);
+  right: calc(100% / 6 * 3 + 16px);
+  right: calc(50% + 16px);
+  left: calc(16.66% + 22px);
+  width: calc(33.33% - 44px);
+  left: calc(16.66%);
+}
+.steps::after {
+  left: calc(50%);
+  width: calc(33.33% - 44px);
+}
+
+/* ── Comparison table ── */
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.comparison {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  min-width: 640px;
+}
+
+.comparison th,
+.comparison td {
+  padding: 14px 20px;
+  text-align: left;
+  border-bottom: 1px solid #E0E4EA;
+}
+
+.comparison thead th {
+  font-weight: 700;
+  color: #0D2137;
+  background: #F7F8FA;
+}
+
+.comparison thead th:last-child {
+  background: #0B7A75;
+  color: #FFFFFF;
+}
+
+.comparison tbody tr:nth-child(even) td {
+  background: #FAFBFC;
+}
+
+.comparison tbody tr:nth-child(even) td:last-child {
+  background: #E6F4F3;
+}
+
+.comparison tbody td:last-child {
+  background: #F0FAF9;
+  font-weight: 600;
+}
+
+.comparison .check {
+  color: #1A7A4A;
+  font-weight: 700;
+}
+
+.comparison .x-mark {
+  color: #9B2335;
+  font-weight: 700;
+}
+
+/* ── Pricing ── */
+.pricing-card {
+  max-width: 420px;
+  margin: 0 auto;
+  background: #FFFFFF;
+  border-radius: 8px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 48px 40px;
+  text-align: center;
+  border-top: 4px solid #0B7A75;
+}
+
+.pricing-card .plan-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #5A6A7A;
+  margin-bottom: 8px;
+}
+
+.pricing-card .price {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #0D2137;
+}
+
+.pricing-card .price span {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #5A6A7A;
+}
+
+.pricing-card .price-sub {
+  font-size: 0.9rem;
+  color: #5A6A7A;
+  margin-bottom: 28px;
+}
+
+.pricing-card ul {
+  list-style: none;
+  text-align: left;
+  margin-bottom: 32px;
+}
+
+.pricing-card li {
+  padding: 8px 0;
+  font-size: 0.95rem;
+  color: #2C3E50;
+  border-bottom: 1px solid #F0F1F3;
+}
+
+.pricing-card li::before {
+  content: '✓ ';
+  color: #1A7A4A;
+  font-weight: 700;
+}
+
+.pricing-extra {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #5A6A7A;
+}
+
+/* ── FAQ ── */
+.faq-list {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  border-bottom: 1px solid #E0E4EA;
+  padding: 24px 0;
+}
+
+.faq-item:first-child {
+  border-top: 1px solid #E0E4EA;
+}
+
+.faq-q {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #0D2137;
+  margin-bottom: 10px;
+}
+
+.faq-a {
+  color: #5A6A7A;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* ── Final CTA ── */
+.final-cta {
+  text-align: center;
+  padding: 80px 0;
+  background: #F7F8FA;
+}
+
+.final-cta h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0D2137;
+  margin-bottom: 12px;
+}
+
+.final-cta .sub {
+  color: #5A6A7A;
+  font-size: 1.1rem;
+  margin-bottom: 32px;
+}
+
+.final-cta .cta-note {
+  font-size: 0.85rem;
+  color: #5A6A7A;
+  margin-top: 16px;
+}
+
+/* ── Footer ── */
+.footer {
+  background: #0D2137;
+  color: #FFFFFF;
+  padding: 48px 0;
+  text-align: center;
+}
+
+.footer-logo {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #0B7A75;
+  margin-bottom: 8px;
+}
+
+.footer-tagline {
+  font-size: 0.9rem;
+  color: #8A97A8;
+  margin-bottom: 20px;
+}
+
+.footer-links {
+  font-size: 0.85rem;
+  color: #8A97A8;
+  margin-bottom: 16px;
+}
+
+.footer-links a {
+  color: #8A97A8;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: #FFFFFF;
+}
+
+.footer-copy {
+  font-size: 0.8rem;
+  color: #5A6A7A;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 1.85rem;
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+  }
+
+  .waitlist-form {
+    flex-direction: column;
+  }
+
+  .waitlist-form .btn {
+    width: 100%;
+  }
+
+  .cards,
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .steps::before,
+  .steps::after {
+    display: none;
+  }
+
+  .section {
+    padding: 56px 0;
+  }
+
+  .section-heading {
+    font-size: 1.5rem;
+    margin-bottom: 32px;
+  }
+
+  .pricing-card {
+    padding: 36px 24px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="container">
+    <div class="nav-logo">MotivIO</div>
+    <button class="btn btn-nav" onclick="document.getElementById('hero-form').scrollIntoView({behavior:'smooth'})">Join Waitlist</button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <h1>Your Bay Area Motivated Seller List. Ready in 10 Minutes.</h1>
+    <p class="hero-sub">Pre-foreclosure and tax-delinquent leads for Alameda, Contra Costa, and San Mateo counties — enriched with phone and email, sorted by urgency, ready to work. No PropStream expertise required.</p>
+
+    <form class="waitlist-form" id="hero-form" onsubmit="return handleWaitlist(event, this)">
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit" class="btn">Join the Waitlist</button>
+    </form>
+    <div class="thank-you" id="hero-thanks">You're on the list. We'll reach out personally before launch with your free trial access.</div>
+
+    <p class="hero-note">Free 7-day trial when we launch. No credit card required.</p>
+    <p class="hero-social">Built specifically for Bay Area investors doing 1–5 deals a month.</p>
+  </div>
+</section>
+
+<!-- Problem -->
+<section class="section section-alt">
+  <div class="container">
+    <h2 class="section-heading">Sound familiar?</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Your vendor's leads are garbage</h3>
+        <p>You're paying $1,000–$3,000/month for a list that every other investor in your market already received. Shared, stale, and impossible to verify.</p>
+      </div>
+      <div class="card">
+        <h3>PropStream takes forever to learn</h3>
+        <p>165 filters, list stacking, Lead Automator — you signed up, got overwhelmed, and went back to your vendor. The tool is powerful but it wasn't built for you.</p>
+      </div>
+      <div class="card">
+        <h3>Pulling county records manually eats your day</h3>
+        <p>You know the data is there. But cleaning it, normalizing it, appending contact info, and sorting by urgency takes hours you don't have.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Solution -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-heading">MotivIO is the list. Not the platform.</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="solution-icon">&#9889;</div>
+        <h3>10 Minutes to Your First List</h3>
+        <p>Sign up, select your county, get a sorted list of motivated sellers with phone and email attached. No configuration. No learning curve. No setup calls.</p>
+      </div>
+      <div class="card">
+        <div class="solution-icon">&#128203;</div>
+        <h3>Direct from County Records</h3>
+        <p>We pull NOD and tax-delinquent filings directly from Alameda, Contra Costa, and San Mateo county records daily. You're working fresh filings within 48 hours — not waiting weeks for a recycled vendor list.</p>
+      </div>
+      <div class="card">
+        <div class="solution-icon">&#127968;</div>
+        <h3>Built for Bay Area Deal Economics</h3>
+        <p>Equity filter pre-set at $100k minimum. Leads sorted by days since filing — most urgent first. Everything calibrated for this market, not a generic national average.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="section section-alt">
+  <div class="container">
+    <h2 class="section-heading">Three steps. Ten minutes.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Pick your county and lead type</h3>
+        <p>Select Alameda, Contra Costa, or San Mateo. Choose pre-foreclosure, tax-delinquent, or both. That's your only configuration decision.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Get your enriched list instantly</h3>
+        <p>Your list appears sorted by urgency — most urgent filings at the top. Phone numbers and email addresses already attached. Ready to call.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Export and work your leads</h3>
+        <p>Download as CSV or connect to your CRM. Every record includes owner name, property address, filing date, days since filing, estimated equity, and contact info.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Comparison -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-heading">The honest comparison</h2>
+    <div class="table-wrap">
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Vendor List</th>
+            <th>PropStream</th>
+            <th>MotivIO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Time to first list</td>
+            <td>Days</td>
+            <td>Hours</td>
+            <td>10 minutes</td>
+          </tr>
+          <tr>
+            <td>List exclusivity</td>
+            <td>Shared</td>
+            <td>Yours</td>
+            <td>Yours</td>
+          </tr>
+          <tr>
+            <td>Bay Area pre-configured</td>
+            <td><span class="x-mark">✗</span></td>
+            <td><span class="x-mark">✗</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Setup required</td>
+            <td>None</td>
+            <td>Significant</td>
+            <td>None</td>
+          </tr>
+          <tr>
+            <td>Direct from county records</td>
+            <td>Unknown</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Contact info included</td>
+            <td>Sometimes</td>
+            <td>Extra cost</td>
+            <td>Included</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="section section-alt">
+  <div class="container">
+    <h2 class="section-heading">One plan. No complexity.</h2>
+    <div class="pricing-card">
+      <div class="plan-name">Bay Area Investor</div>
+      <div class="price" style="font-size:1.5rem;">Simple, affordable monthly pricing.<br>Early waitlist members set the price.</div>
+      <p class="price-sub">Free 7-day trial · No credit card required · Cancel anytime</p>
+      <ul>
+        <li>Unlimited list pulls for Alameda, Contra Costa, San Mateo</li>
+        <li>Pre-foreclosure (NOD) and tax-delinquent leads</li>
+        <li>500 skip trace credits per month (phone + email)</li>
+        <li>Sorted by urgency — most urgent first</li>
+        <li>CSV export</li>
+        <li>Email support</li>
+      </ul>
+      <button class="btn" onclick="document.getElementById('hero-form').scrollIntoView({behavior:'smooth'})">Join the Waitlist</button>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-heading">Quick answers</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">How is this different from PropStream?</div>
+        <div class="faq-a">PropStream is a powerful research tool for investors who want to become data experts. MotivIO is for investors who just want the list. No 165 filters, no configuration, no learning curve. You get a clean sorted list in 10 minutes.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Where does the data come from?</div>
+        <div class="faq-a">Directly from Alameda, Contra Costa, and San Mateo county recorder and tax collector records. The same public records that PropStream and every other data provider uses — but pre-configured and cleaned specifically for Bay Area investors.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is MotivIO pulling the same data for every user?</div>
+        <div class="faq-a">The underlying county records are public — the same records are accessible to anyone. What's different is that most investors never access them directly because it takes too long and requires too much manual work. MotivIO removes that barrier, so you're working fresh filings within 48 hours of recording instead of getting a vendor list that's been sitting for two weeks and sold to five other buyers. Your edge isn't that nobody else can see the data — it's that you're seeing it faster and acting on it sooner.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Why Bay Area only?</div>
+        <div class="faq-a">Because a tool that tries to be everywhere ends up pre-configured for nowhere. Bay Area NOD filings, equity ranges, and deal economics are different from national averages. We built the defaults around this market specifically.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What happens after I join the waitlist?</div>
+        <div class="faq-a">You'll get early access before public launch, the free 7-day trial, and a chance to shape the product with your feedback. We'll reach out personally — not a drip campaign.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">When does it launch?</div>
+        <div class="faq-a">We're targeting a launch within 60 days. Waitlist members get access first.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta">
+  <div class="container">
+    <h2>Get early access before we launch.</h2>
+    <p class="sub">Join the waitlist. Free 7-day trial. Shape the product.</p>
+
+    <form class="waitlist-form" id="footer-form" onsubmit="return handleWaitlist(event, this)">
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit" class="btn">Join the Waitlist</button>
+    </form>
+    <div class="thank-you" id="footer-thanks">You're on the list. We'll reach out personally before launch with your free trial access.</div>
+
+    <p class="cta-note">No spam. No drip campaigns. A real person will reach out.</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-logo">MotivIO</div>
+    <p class="footer-tagline">Motivated seller lists for Bay Area investors.</p>
+    <p class="footer-links"><a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a></p>
+    <p class="footer-copy">&copy; 2025 MotivIO</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// TODO: Replace these with your Supabase project credentials
+var SUPABASE_URL = 'https://yrafwawyaqihdkrnalrc.supabase.co';             // e.g. https://xxxxx.supabase.co
+var SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_uOciVG4RbmFQQt0a37CWCw_XIUhXO27';  // sb_publishable_xxx
+
+var supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+async function handleWaitlist(e, form) {
+  e.preventDefault();
+  var input = form.querySelector('input[type="email"]');
+  var btn = form.querySelector('button');
+  var email = input.value.trim();
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return false;
+
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  var { error } = await supabase.from('waitlist').insert({ email: email });
+
+  if (error && error.code === '23505') {
+    // Duplicate email — treat as success
+    error = null;
+  }
+
+  if (error) {
+    btn.disabled = false;
+    btn.textContent = 'Join the Waitlist';
+    alert('Something went wrong. Please try again.');
+    return false;
+  }
+
+  // Show thank-you message, hide form
+  form.style.display = 'none';
+  var thanksId = form.id === 'hero-form' ? 'hero-thanks' : 'footer-thanks';
+  document.getElementById(thanksId).classList.add('visible');
+  return false;
+}
+</script>
+</body>
+</html>
