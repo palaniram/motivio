@@ -168,6 +168,53 @@ a {
   display: block;
 }
 
+/* ── Video demo ── */
+.video-demo {
+  padding: 0 0 0;
+  text-align: center;
+}
+
+.video-demo h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0D2137;
+  margin-bottom: 10px;
+}
+
+.video-demo .video-sub {
+  font-size: 1.1rem;
+  color: #5A6A7A;
+  margin-bottom: 36px;
+}
+
+.video-demo .video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  max-width: 800px;
+  margin: 0 auto 16px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+}
+
+.video-demo .video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-demo .video-caption {
+  font-size: 0.9rem;
+  color: #5A6A7A;
+  max-width: 640px;
+  margin: 0 auto;
+  font-style: italic;
+}
+
 /* ── Cards grid ── */
 .cards {
   display: grid;
@@ -549,6 +596,16 @@ a {
 
     <p class="hero-note">Free 7-day trial when we launch. No credit card required.</p>
     <p class="hero-social">Built specifically for Bay Area investors doing 1–5 deals a month.</p>
+  </div>
+</section>
+
+<!-- Video Demo -->
+<section class="video-demo">
+  <div class="container">
+    <h2>See it work.</h2>
+    <div class="video-wrapper">
+      <iframe src="https://www.loom.com/embed/60bd5cef9e944ef0b07d137c3b46d8d5" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    </div>    
   </div>
 </section>
 
